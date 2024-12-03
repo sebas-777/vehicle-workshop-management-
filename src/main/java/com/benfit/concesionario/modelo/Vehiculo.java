@@ -17,9 +17,9 @@ public class Vehiculo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idVehiculo;
-    private String matricula;
-    private String marca;
-    private String modelo;
-    private Integer fabricado;
+    Integer idVehiculo;
+     String matricula;
+     String marca;
+     String modelo;
+     Integer fabricado;
 }

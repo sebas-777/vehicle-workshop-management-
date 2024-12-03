@@ -7,14 +7,14 @@ public class OrdenTrabajo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+     Integer idOrdenTrabajo;
 
     @ManyToOne(optional = false)
     @JoinColumn(name="vehiculo_id")
-    private Vehiculo vehiculo;
+     Vehiculo vehiculo;
 
-    private String descripcion;
+     String descripcion;
 
-    private Boolean estatus;
+     Boolean estatus;
 
 }
