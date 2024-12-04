@@ -18,8 +18,8 @@ public class OrdenTrabajoServicio implements IOrdenTrabajoServicio {
     @Override
     public List<OrdenTrabajo> listarOrdenesTrabajo() {
 
-       this.ordenTrabajoRepositorio.findAll();
-        return List.of();
+       return this.ordenTrabajoRepositorio.findAll();
+
     }
 
     @Override

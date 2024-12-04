@@ -16,8 +16,8 @@ public class VehiculoServicio implements IVehiculoServicio {
 
     @Override
     public List<Vehiculo> ListarVehiculos() {
-        this.vehiculoRepositorio.findAll();
-        return List.of();
+        return this.vehiculoRepositorio.findAll();
+
     }
 
     @Override

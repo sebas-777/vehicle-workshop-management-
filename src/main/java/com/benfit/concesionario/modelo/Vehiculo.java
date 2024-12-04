@@ -17,7 +17,7 @@ public class Vehiculo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer idVehiculo;
+     Integer idVehiculo;
      String matricula;
      String marca;
      String modelo;
