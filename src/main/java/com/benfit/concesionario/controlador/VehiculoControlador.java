@@ -6,10 +6,7 @@ import com.benfit.concesionario.servicio.VehiculoServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,14 +22,55 @@ public class VehiculoControlador {
     private VehiculoServicio vehiculoServicio;
 
     //http://localhost:8010/concesionario-app/vehiculos
-    @GetMapping("/vehiculos")
+    @GetMapping(value="/vehiculos",produces="application/json")
+    @ResponseBody
     public List<Vehiculo> obtenerVehiculos(){
-        List<Vehiculo>vehiculos = this.vehiculoServicio.ListarVehiculos();
-        logger.info("Vehiculos obtenidos:");
-        vehiculos.forEach((vehiculo -> logger.info(vehiculo.toString())));
-        System.out.println(vehiculos);
-        return vehiculos;
+       try{
+           List<Vehiculo>vehiculos = this.vehiculoServicio.ListarVehiculos();
+           logger.info("Vehiculos obtenidos desde la base de datos:");
+           vehiculos.forEach((vehiculo -> logger.info(vehiculo.toString())));
+           System.out.println(vehiculos);
+           return vehiculos;
+       }catch (Exception e){
+           logger.error("Error obtenidos vehiculos:{}",e.getMessage(),e);
+           throw e;
+       }
 
     }
+
+    //http://localhost:8010/concesionario-app/guardar
+    @PostMapping(value = "/guardar",consumes="application/json")
+    public Vehiculo guardarVehiculo( @RequestBody Vehiculo vehiculo){
+        try{
+            return vehiculoServicio.guardarVehiculo(vehiculo);
+        } catch (Exception e) {
+            logger.error("Error al guardar vehiculos:{}",e.getMessage(),e);
+            throw e;
+        }
+
+    }
+
+    //http://localhost:8010/concesionario-app/1
+    @GetMapping("/{idVehiculo}")
+    public Vehiculo buscarVehiculoPorId(@PathVariable Integer idVehiculo){
+        try {
+            return vehiculoServicio.buscarVehiculoPorId(idVehiculo);
+        }catch (Exception e){
+            logger.error("Error al buscar vehiculo con ID:{}",idVehiculo,e);
+            throw e;
+        }
+    }
+
+    @DeleteMapping("/{idVehiculo}")
+    public void eliminarVehiculoPorId(@PathVariable Integer idVehiculo){
+        try{
+            vehiculoServicio.eliminarVehiculoPorId(idVehiculo);
+        } catch (Exception e) {
+            logger.error("Error al eliminar vehiculo con ID:{}",idVehiculo,e);
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 }

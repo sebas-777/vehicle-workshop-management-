@@ -10,7 +10,7 @@ public interface IVehiculoServicio {
 
     public Vehiculo buscarVehiculoPorId(Integer idVehiculo);
 
-    public void guardarVehiculo(Vehiculo vehiculo);
+    public Vehiculo guardarVehiculo(Vehiculo vehiculo);
 
     public void eliminarVehiculoPorId(Integer idVehiculo);
 
